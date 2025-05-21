@@ -8,7 +8,7 @@ function calculateATK() {
   const active = (parseInt(document.getElementById("atkActive").value) || 0) / 100;
   const eActive = (parseInt(document.getElementById("atkEActive").value) || 0) / 100;
   const domain = (parseInt(document.getElementById("atkdomain").value) || 0) / 100;
-  const links = (parseInt(document.getElementById("atkLinks").value) || 0) / 100;
+  const links = (parseFloat(document.getElementById("atkLinks").value) || 0) / 100;
   const kiMulti = (parseInt(document.getElementById("atkKiMulti").value) || 0) / 100;
   const saMulti = (parseInt(document.getElementById("atkSAMulti").value) || 0) / 100;
   const saBoost = parseInt(document.getElementById("atkSABoost").value) || 0;
@@ -39,7 +39,7 @@ function calculateDEF() {
   const active = (parseInt(document.getElementById("defActive").value) || 0) / 100;
   const eactive = (parseInt(document.getElementById("defEActive").value) || 0 ) /100;
   const domain = (parseInt(document.getElementById("defdomain").value) || 0) / 100;
-  const links = (parseInt(document.getElementById("defLinks").value) || 0) / 100;
+  const links = (parseFloat(document.getElementById("defLinks").value) || 0) / 100;
   const SAEffect = (parseInt(document.getElementById("defSAEffect").value) || 0) / 100;
   const stacking = (parseInt(document.getElementById("defStacking").value) || 0) / 100;
 
