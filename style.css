@@ -1,0 +1,153 @@
+/* Base Styles */
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background: linear-gradient(135deg, #b4b4b4 0%, hwb(0 39% 61%) 100%);
+  padding: 20px;
+  color: #333;
+  margin: 0;
+  background-attachment: fixed;
+}
+h1 {
+  text-align: center;
+  margin: 0 auto 30px; /* Top | Horizontal | Bottom */
+  width: 100%;
+  max-width: 1200px; /* Matches calculator width */
+  padding: 0 20px; /* Prevents edge touching */
+  box-sizing: border-box;
+}
+/* Calculator Container */
+.calculator {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Sections - 2 columns side by side */
+.section {
+  width: calc(50% - 20px);
+  min-width: 350px;
+  padding: 20px;
+  background-color: hsl(0, 0%, 97%);
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+/* Form Grid - 2 columns for inputs */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.form-group {
+  display: grid;
+  grid-template-columns: auto 80px; /* Label | Input */
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: auto 80px; /* Label | Input */
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+/* Section Colors */
+.section:nth-child(1) {
+  background-color: #FFF7E6;
+  border-left: 4px solid #FA8C16;
+}
+.section:nth-child(2) {
+  background-color: #E6F7FF;
+  border-left: 4px solid #1890FF;
+}
+
+
+label {
+  text-align: left;
+  padding-right: 10px;
+  white-space: nowrap; 
+  font-size: 14px;
+}
+
+input {
+  width: 80px; 
+  padding: 5px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+
+button {
+  margin-top: 20px;
+  padding: 12px;
+  width: 100%;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  grid-column: span 2; 
+}
+
+.section:nth-child(1) button {
+  background: #FA8C16;
+}
+.section:nth-child(2) button {
+  background: #1890FF;
+}
+
+@media (max-width: 768px) {
+  html, body {
+    width: 100%;
+    overflow-x: hidden; /* Double lock horizontal scrolling */
+    position: relative; /* Contain any absolute elements */
+  }
+
+  .container {
+    width: 100vw; /* Full viewport width */
+    padding: 0;
+    margin: 0;
+  }
+
+  .calculator {
+    width: 100%;
+    max-width: 100vw; /* Strict viewport limit */
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .section {
+    margin: 0;
+    padding: 15px 10px; /* Reduced side padding */
+  }
+
+  .form-row {
+    grid-template-columns: 1fr; /* Force single column */
+  }
+
+  label {
+    white-space: normal; /* Allow text wrapping */
+    padding-right: 0;
+  }
+
+  input {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Add this to prevent any edge cases */
+* {
+  max-width: 100%; /* Nuclear option for all elements */
+  box-sizing: border-box;
+}
