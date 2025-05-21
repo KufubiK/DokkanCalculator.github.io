@@ -1,3 +1,4 @@
+/* Base Styles */
 body {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background: linear-gradient(135deg, #b4b4b4 0%, hwb(0 39% 61%) 100%);
@@ -5,6 +6,7 @@ body {
   color: #333;
   margin: 0;
   background-attachment: fixed;
+  min-height: 100vh;
 }
 
 h1 {
@@ -13,123 +15,145 @@ h1 {
   font-family: inherit;
 }
 
+/* Calculator Container */
 .calculator {
   display: flex;
   justify-content: center;
-  flex-wrap: nowrap;
-  gap: 15px; /* Reduced gap to give more space to boxes */
-  min-height: calc(100vh - 200px);
-  max-width: 1400px; /* Increased max-width to accommodate wider boxes */
+  flex-wrap: wrap; /* Changed to wrap for mobile */
+  gap: 15px;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 20px 0;
 }
 
+/* Sections - Side by Side on Desktop */
 .section {
-  width: 49.5%; /* Increased from 48% to 49.5% */
-  min-width: 380px; /* Increased from 350px */
+  width: calc(50% - 15px); /* Account for gap */
+  min-width: 300px;
   padding: 20px;
   background-color: hsl(0, 0%, 97%);
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  box-sizing: border-box; /* Ensures padding is included in width */
+  box-sizing: border-box;
 }
 
-/* Rest of your CSS remains the same */
+/* First Section Styles */
+.section:nth-child(1) {
+  background-color: #FFF7E6;
+  border-left: 4px solid #FA8C16;
+}
+
+/* Second Section Styles */
+.section:nth-child(2) {
+  background-color: #E6F7FF;
+  border-left: 4px solid #1890FF;
+}
+
+/* Form Elements */
 label {
   display: block;
-  margin: 10px 0;
+  margin: 15px 0 5px;
   font-family: inherit;
 }
 
 input {
   width: 100%;
-  padding: 6px;
+  padding: 10px;
   margin-top: 4px;
   font-family: inherit;
+  font-size: 16px; /* Better mobile experience */
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
+/* Buttons */
 button {
-  margin-top: 10px;
-  padding: 10px;
+  margin-top: 15px;
+  padding: 12px;
   width: 100%;
-  background: hwb(211 44% 15%);
-  color: rgb(255, 255, 255);
+  color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-family: inherit;
+  font-weight: bold;
+  transition: background 0.2s ease;
 }
 
-button:hover {
-  background: hsl(211, 53%, 53%);
+.section:nth-child(1) button {
+  background: #FA8C16;
 }
 
+.section:nth-child(2) button {
+  background: #1890FF;
+}
+
+.section:nth-child(1) button:hover {
+  background: #D46B08;
+}
+
+.section:nth-child(2) button:hover {
+  background: #096DD9;
+}
+
+/* Form Layouts */
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px;
-}
-
-label {
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-  font-family: inherit;
-}
-
-.form-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: space-between;
 }
 
 .form-row {
   display: flex;
   align-items: center;
-  width: 48%;
+  gap: 10px;
+  width: 100%;
 }
 
 .form-row label {
   flex: 1;
   font-size: 14px;
+  margin: 0;
 }
 
 .form-row input {
-  flex: 1;
-  padding: 4px;
+  flex: 2;
+  padding: 8px;
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .calculator {
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  .section {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  input, button {
+    padding: 12px; /* Larger touch targets */
+  }
+  
+  button {
+    margin-top: 20px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .form-row input {
+    width: 100%;
+  }
 }
 
-
-.section:nth-child(1) {
-  background-color: #FFF7E6; /* Light blue for first section */
-  border-left: 4px solid #FA8C16; /* Optional accent border */
-}
-
-.section:nth-child(2) {
-  background-color: #E6F7FF; /* Light orange for second section */
-  border-left: 4px solid #1890FF; /* Optional accent border */
-}
-
-/* First section's button */
-.section:nth-child(1) button {
-  background: #FA8C16; /* Blue */
-}
-
-/* Second section's button */
-.section:nth-child(2) button {
-  background: #1890FF; /* Orange */
-}
-
-/* Hover states */
-.section:nth-child(1) button:hover {
-  background: #D46B08;
-}
-.section:nth-child(2) button:hover {
-  background: #096DD9;
+/* Accessibility Improvements */
+input:focus, button:focus {
+  outline: 2px solid #1890FF;
+  outline-offset: 2px;
 }
