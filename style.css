@@ -265,10 +265,29 @@ button {
   background-color: #ffd9d9;
 }
 
+/* Highlight styles for all devices */
+.sa-multiplier-table tr {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.sa-multiplier-table tr.highlighted {
+  background-color: #ff9999 !important;
+  box-shadow: 0 0 0 2px #f47c7c inset;
+  position: relative;
+}
+
+.sa-multiplier-table tr.highlighted:hover {
+  background-color: #ff8888 !important;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .sa-multiplier-table {
     font-size: 14px;
+  }
+  .sa-multiplier-table tr.highlighted {
+    box-shadow: 0 0 0 3px #eb8484 inset; /* Thicker border for mobile */
   }
 }
 
@@ -283,4 +302,3 @@ button {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
-
