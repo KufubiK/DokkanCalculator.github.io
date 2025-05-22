@@ -56,3 +56,34 @@ function calculateDEF() {
 
   document.getElementById("defResult").textContent = `Result: ${result.toLocaleString()}`;
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const table = document.querySelector('.sa-multiplier-table');
+    let lastHighlighted = null;
+
+    table.addEventListener('click', function(e) {
+        // Find the closest clicked row
+        const row = e.target.closest('tr');
+        if (!row || row.parentNode.nodeName === 'THEAD') return;
+
+        // Toggle highlight
+        if (lastHighlighted === row) {
+            row.classList.remove('highlighted');
+            lastHighlighted = null;
+        } else {
+            if (lastHighlighted) lastHighlighted.classList.remove('highlighted');
+            row.classList.add('highlighted');
+            lastHighlighted = row;
+        }
+    });
+
+    // Optional: Clear highlight when clicking outside table
+    document.addEventListener('click', function(e) {
+        if (!table.contains(e.target)) {
+            if (lastHighlighted) {
+                lastHighlighted.classList.remove('highlighted');
+                lastHighlighted = null;
+            }
+        }
+    });
+});
