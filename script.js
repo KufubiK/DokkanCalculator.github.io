@@ -1,19 +1,19 @@
 function calculateATK() {
-  const base = parceFloat(document.getElementById("atkStat").value) || 0;
-  const leader = (parceFloat(document.getElementById("atkLeader").value) || 0) / 100;
-  const supportMemory = (parceFloat(document.getElementById("atkSupportMemory").value) || 0) / 100;
-  const sot = (parceFloat(document.getElementById("atkSoT").value) || 0) / 100;
-  const nonSot = (parceFloat(document.getElementById("atkNonSoT").value) || 0) / 100;
-  const support = (parceFloat(document.getElementById("atkSupport").value) || 0) / 100;
-  const active = (parceFloat(document.getElementById("atkActive").value) || 0) / 100;
-  const eActive = (parceFloat(document.getElementById("atkEActive").value) || 0) / 100;
-  const domain = (parceFloat(document.getElementById("atkdomain").value) || 0) / 100;
+  const base = parseFloat(document.getElementById("atkStat").value) || 0;
+  const leader = (parseFloat(document.getElementById("atkLeader").value) || 0) / 100;
+  const supportMemory = (parseFloat(document.getElementById("atkSupportMemory").value) || 0) / 100;
+  const sot = (parseFloat(document.getElementById("atkSoT").value) || 0) / 100;
+  const nonSot = (parseFloat(document.getElementById("atkNonSoT").value) || 0) / 100;
+  const support = (parseFloat(document.getElementById("atkSupport").value) || 0) / 100;
+  const active = (parseFloat(document.getElementById("atkActive").value) || 0) / 100;
+  const eActive = (parseFloat(document.getElementById("atkEActive").value) || 0) / 100;
+  const domain = (parseFloat(document.getElementById("atkdomain").value) || 0) / 100;
   const links = (parseFloat(document.getElementById("atkLinks").value) || 0) / 100;
-  const kiMulti = (parceFloat(document.getElementById("atkKiMulti").value) || 0) / 100;
-  const saMulti = (parceFloat(document.getElementById("atkSAMulti").value) || 0) / 100;
-  const saBoost = parceFloat(document.getElementById("atkSABoost").value) || 0;
-  const saEffect = (parceFloat(document.getElementById("atkSAEffect").value) || 0) / 100;
-  const stacking = (parceFloat(document.getElementById("atkStacking").value) || 0) / 100;
+  const kiMulti = (parseFloat(document.getElementById("atkKiMulti").value) || 0) / 100;
+  const saMulti = (parseFloat(document.getElementById("atkSAMulti").value) || 0) / 100;
+  const saBoost = parseFloat(document.getElementById("atkSABoost").value) || 0;
+  const saEffect = (parseFloat(document.getElementById("atkSAEffect").value) || 0) / 100;
+  const stacking = (parseFloat(document.getElementById("atkStacking").value) || 0) / 100;
 
   result = base;
   result = Math.floor(result * (1 + leader));
@@ -30,18 +30,18 @@ function calculateATK() {
 }
 
 function calculateDEF() {
-  const base = parceFloat(document.getElementById("defStat").value) || 0;
-  const leader = (parceFloat(document.getElementById("defLeader").value) || 0) / 100;
-  const supportmemory = (parceFloat(document.getElementById("defSupportMemory").value) || 0) / 100;
-  const sot = (parceFloat(document.getElementById("defSoT").value) || 0) / 100;
-  const nonsot = (parceFloat(document.getElementById("defNonSoT").value) || 0) / 100;
-  const support = (parceFloat(document.getElementById("defSupport").value) || 0) / 100;
-  const active = (parceFloat(document.getElementById("defActive").value) || 0) / 100;
-  const eactive = (parceFloat(document.getElementById("defEActive").value) || 0 ) /100;
-  const domain = (parceFloat(document.getElementById("defdomain").value) || 0) / 100;
+  const base = parseFloat(document.getElementById("defStat").value) || 0;
+  const leader = (parseFloat(document.getElementById("defLeader").value) || 0) / 100;
+  const supportmemory = (parseFloat(document.getElementById("defSupportMemory").value) || 0) / 100;
+  const sot = (parseFloat(document.getElementById("defSoT").value) || 0) / 100;
+  const nonsot = (parseFloat(document.getElementById("defNonSoT").value) || 0) / 100;
+  const support = (parseFloat(document.getElementById("defSupport").value) || 0) / 100;
+  const active = (parseFloat(document.getElementById("defActive").value) || 0) / 100;
+  const eactive = (parseFloat(document.getElementById("defEActive").value) || 0 ) /100;
+  const domain = (parseFloat(document.getElementById("defdomain").value) || 0) / 100;
   const links = (parseFloat(document.getElementById("defLinks").value) || 0) / 100;
-  const SAEffect = (parceFloat(document.getElementById("defSAEffect").value) || 0) / 100;
-  const stacking = (parceFloat(document.getElementById("defStacking").value) || 0) / 100;
+  const SAEffect = (parseFloat(document.getElementById("defSAEffect").value) || 0) / 100;
+  const stacking = (parseFloat(document.getElementById("defStacking").value) || 0) / 100;
 
   result = base;
   result = Math.floor(result * (1 + leader));
