@@ -1,89 +1,130 @@
+// --- 1. THEME MEMORY LOGIC ---
+// --- UPDATED THEME LOGIC ---
+function initTheme() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    
+    // Sync the button icon with the theme already set by the head script
+    const currentTheme = root.getAttribute('data-theme');
+    if (themeToggle) {
+        themeToggle.innerText = currentTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            // Enable transitions ONLY for this toggle event
+            document.body.classList.add('theme-transition');
+            
+            const isDark = root.getAttribute('data-theme') === 'dark';
+            const newTheme = isDark ? 'light' : 'dark';
+            
+            root.setAttribute('data-theme', newTheme);
+            localStorage.setItem('dokkan-theme', newTheme);
+            themeToggle.innerText = newTheme === 'dark' ? '☀️' : '🌙';
+
+            // Remove the class after the transition finishes (300ms)
+            // to keep the initial page loads clean
+            setTimeout(() => {
+                document.body.classList.remove('theme-transition');
+            }, 350);
+        });
+    }
+}
+
+// --- 2. TABLE INTERACTION (ROW ONLY) ---
+function initTableHighlight() {
+    const table = document.querySelector('.sa-multiplier-table table');
+    if (!table) return;
+
+    const rows = table.querySelectorAll('tr');
+    const cells = table.querySelectorAll('td');
+    let selectedCell = null;
+
+    cells.forEach(cell => {
+        // Hover: Row only
+        cell.addEventListener('mouseover', function() {
+            if (!selectedCell) this.parentElement.classList.add('row-highlight');
+        });
+
+        cell.addEventListener('mouseout', function() {
+            if (!selectedCell) this.parentElement.classList.remove('row-highlight');
+        });
+
+        // Click: Select cell and lock Row
+        cell.addEventListener('click', function(e) {
+            const row = this.parentElement;
+
+            // Deselect logic
+            if (selectedCell === this) {
+                this.classList.remove('selected');
+                row.classList.remove('row-highlight');
+                selectedCell = null;
+                return;
+            }
+
+            // Clear previous selections
+            cells.forEach(c => c.classList.remove('selected'));
+            rows.forEach(r => r.classList.remove('row-highlight'));
+
+            // Set new selection
+            this.classList.add('selected');
+            row.classList.add('row-highlight');
+            selectedCell = this;
+        });
+    });
+}
+
+// --- 3. CALCULATIONS ---
 function calculateATK() {
-  const base = parseFloat(document.getElementById("atkStat").value) || 0;
-  const leader = (parseFloat(document.getElementById("atkLeader").value) || 0) / 100;
-  const supportMemory = (parseFloat(document.getElementById("atkSupportMemory").value) || 0) / 100;
-  const sot = (parseFloat(document.getElementById("atkSoT").value) || 0) / 100;
-  const nonSot = (parseFloat(document.getElementById("atkNonSoT").value) || 0) / 100;
-  const support = (parseFloat(document.getElementById("atkSupport").value) || 0) / 100;
-  const active = (parseFloat(document.getElementById("atkActive").value) || 0) / 100;
-  const eActive = (parseFloat(document.getElementById("atkEActive").value) || 0) / 100;
-  const domain = (parseFloat(document.getElementById("atkdomain").value) || 0) / 100;
-  const links = (parseFloat(document.getElementById("atkLinks").value) || 0) / 100;
-  const kiMulti = (parseFloat(document.getElementById("atkKiMulti").value) || 0) / 100;
-  const saMulti = (parseFloat(document.getElementById("atkSAMulti").value) || 0) / 100;
-  const saBoost = parseFloat(document.getElementById("atkSABoost").value) || 0;
-  const saEffect = (parseFloat(document.getElementById("atkSAEffect").value) || 0) / 100;
-  const stacking = (parseFloat(document.getElementById("atkStacking").value) || 0) / 100;
+    const getVal = (id) => parseFloat(document.getElementById(id).value) || 0;
 
-  result = base;
-  result = Math.floor(result * (1 + leader));
-  result = Math.floor(result * (1 + supportMemory));
-  result = Math.floor(result * (1 + sot + support));
-  result = Math.floor(result * (1 + links));
-  result = Math.floor(result * (1 + active + eActive));
-  result = Math.ceil(result * (kiMulti));
-  result = Math.floor(result * (1 + nonSot));
-  result = Math.round(result * (saMulti + saEffect + stacking + saBoost*(0.05)));
-  result = Math.floor(result * (1 + domain));
+    let result = getVal("atkStat");
+    result = Math.floor(result * (1 + getVal("atkLeader") / 100));
+    result = Math.floor(result * (1 + getVal("atkSupportMemory") / 100));
+    result = Math.floor(result * (1 + (getVal("atkSoT") + getVal("atkSupport")) / 100));
+    result = Math.floor(result * (1 + getVal("atkLinks") / 100));
+    result = Math.floor(result * (1 + (getVal("atkActive") + getVal("atkEActive")) / 100));
+    result = Math.ceil(result * (getVal("atkKiMulti") / 100));
+    result = Math.floor(result * (1 + getVal("atkNonSoT") / 100));
+    
+    // SA Multiplier grouping
+    const saSum = (getVal("atkSAMulti") + getVal("atkSAEffect") + getVal("atkStacking")) / 100 + (getVal("atkSABoost") * 0.05);
+    result = Math.round(result * saSum);
+    result = Math.floor(result * (1 + getVal("atkdomain") / 100));
 
-  document.getElementById("atkResult").textContent = `Result: ${result.toLocaleString()}`;
+    document.getElementById("atkResult").textContent = `Result: ${result.toLocaleString()}`;
 }
 
 function calculateDEF() {
-  const base = parseFloat(document.getElementById("defStat").value) || 0;
-  const leader = (parseFloat(document.getElementById("defLeader").value) || 0) / 100;
-  const supportmemory = (parseFloat(document.getElementById("defSupportMemory").value) || 0) / 100;
-  const sot = (parseFloat(document.getElementById("defSoT").value) || 0) / 100;
-  const nonsot = (parseFloat(document.getElementById("defNonSoT").value) || 0) / 100;
-  const support = (parseFloat(document.getElementById("defSupport").value) || 0) / 100;
-  const active = (parseFloat(document.getElementById("defActive").value) || 0) / 100;
-  const eactive = (parseFloat(document.getElementById("defEActive").value) || 0 ) /100;
-  const domain = (parseFloat(document.getElementById("defdomain").value) || 0) / 100;
-  const links = (parseFloat(document.getElementById("defLinks").value) || 0) / 100;
-  const SAEffect = (parseFloat(document.getElementById("defSAEffect").value) || 0) / 100;
-  const stacking = (parseFloat(document.getElementById("defStacking").value) || 0) / 100;
+    const getVal = (id) => parseFloat(document.getElementById(id).value) || 0;
 
-  result = base;
-  result = Math.floor(result * (1 + leader));
-  result = Math.floor(result * (1 + supportmemory));
-  result = Math.floor(result * (1 + sot + support));
-  result = Math.floor(result * (1 + links));
-  result = Math.floor(result * (1 + active + eactive));
-  result = Math.floor(result * (1 + nonsot));
-  result = Math.floor(result * (1 + SAEffect));
-  result = Math.floor(result * (1 + domain));
-  result = Math.floor(result * (1 + stacking));
+    let result = getVal("defStat");
+    result = Math.floor(result * (1 + getVal("defLeader") / 100));
+    result = Math.floor(result * (1 + getVal("defSupportMemory") / 100));
+    result = Math.floor(result * (1 + (getVal("defSoT") + getVal("defSupport")) / 100));
+    result = Math.floor(result * (1 + getVal("defLinks") / 100));
+    result = Math.floor(result * (1 + (getVal("defActive") + getVal("defEActive")) / 100));
+    result = Math.floor(result * (1 + getVal("defNonSoT") / 100));
+    result = Math.floor(result * (1 + getVal("defSAEffect") / 100));
+    result = Math.floor(result * (1 + getVal("defdomain") / 100));
+    result = Math.floor(result * (1 + getVal("defStacking") / 100));
 
-  document.getElementById("defResult").textContent = `Result: ${result.toLocaleString()}`;
+    document.getElementById("defResult").textContent = `Result: ${result.toLocaleString()}`;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const table = document.querySelector('.sa-multiplier-table');
-    let lastHighlighted = null;
+// --- 4. TABS & INITIALIZATION ---
+function openTab(tabId) {
+    const contents = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-button');
+    
+    contents.forEach(c => c.classList.remove('active'));
+    buttons.forEach(b => b.classList.remove('active'));
+    
+    document.getElementById(tabId).classList.add('active');
+    event.currentTarget.classList.add('active');
+}
 
-    table.addEventListener('click', function(e) {
-        // Find the closest clicked row
-        const row = e.target.closest('tr');
-        if (!row || row.parentNode.nodeName === 'THEAD') return;
-
-        // Toggle highlight
-        if (lastHighlighted === row) {
-            row.classList.remove('highlighted');
-            lastHighlighted = null;
-        } else {
-            if (lastHighlighted) lastHighlighted.classList.remove('highlighted');
-            row.classList.add('highlighted');
-            lastHighlighted = row;
-        }
-    });
-
-    // Optional: Clear highlight when clicking outside table
-    document.addEventListener('click', function(e) {
-        if (!table.contains(e.target)) {
-            if (lastHighlighted) {
-                lastHighlighted.classList.remove('highlighted');
-                lastHighlighted = null;
-            }
-        }
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    initTableHighlight();
 });
