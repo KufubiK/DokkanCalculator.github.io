@@ -74,10 +74,15 @@ h1 {
   background-color: #ff9800;
 }
 
+.tab-button[onclick="openTab('damage-tab')"].active {
+  background-color: #c343cc;
+}
+
 /* Green styling for Instructions tab */
 .tab-button[onclick="openTab('instructions-tab')"].active {
   background-color: #4CAF50;
 }
+
 
 .tab-content {
   display: none;
@@ -108,9 +113,109 @@ h1 {
   border-bottom: 2px solid #1890FF; /* Blue for defense */
 }
 
+#damage-tab .section h2{
+  border-bottom: 2px solid #c343cc;
+}
+
 #instructions-tab .section h2 {
   border-bottom: 2px solid #4CAF50; /* Green for instructions */
 }
+
+
+/* Purple styling for Damage Taken tab button */
+.tab-button[onclick="openTab('damage-tab')"].active {
+  background-color: #9b59b6; /* Purple */
+}
+
+/* Purple section header for Damage Taken */
+#damage-tab .section h2 {
+  border-bottom: 2px solid #9b59b6;
+}
+
+/* Purple button styling */
+#damage-tab button {
+  padding: 12px 20px;
+  background-color: #9b59b6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#damage-tab button:hover {
+  background-color: #8e44ad;
+}
+
+/* Purple result box */
+#damage-tab .result-box {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f5eef8;
+  border-left: 4px solid #9b59b6;
+  font-size: 18px;
+  font-weight: bold;
+  color: #5b2c6f;
+}
+select {
+  width: 100%;
+  padding: 10px; /* Matches your input padding */
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1rem;
+  
+  /* This ensures the height matches exactly */
+  height: 42px; 
+  
+  /* Removes default browser styling for a cleaner look */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  
+  /* Optional: Adds a custom small arrow to show it is a dropdown */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+  cursor: pointer;
+}
+
+/* Ensure the disabled (greyed out) state also looks consistent */
+select:disabled {
+  background-color: #e2e8f0;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Match the focus effect of your input boxes */
+select:focus {
+  border-color: var(--dokkan-orange);
+  outline: none;
+}
+
+input:disabled, 
+select:disabled {
+  cursor: not-allowed;
+  filter: grayscale(1);
+  opacity: 0.5; /* Makes it look faded in both modes */
+  border-color: rgba(128, 128, 128, 0.3) !important;
+}
+
+/* Specific Dark Mode adjustment for the background */
+[data-theme="dark"] input:disabled {
+  background-color: #0f172a !important; /* A deeper dark to show it's "off" */
+  color: #475569 !important; /* Muted text color */
+}
+
+/* Light Mode adjustment for the background */
+[data-theme="light"] input:disabled {
+  background-color: #e2e8f0 !important;
+  color: #94a3b8 !important;
+}
+
 
 .form-grid {
   display: grid;
@@ -601,4 +706,21 @@ input::-webkit-inner-spin-button {
 .theme-transition .turn-section,
 .theme-transition input {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+input, select, .container, .turn-section, .result-box, body {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* Specific lock for the theme toggle event */
+.theme-transition, 
+.theme-transition *, 
+.theme-transition select, 
+.theme-transition input {
+  transition: background-color 0.3s ease !important, color 0.3s ease !important, border-color 0.3s ease !important;
+}
+
+select {
+  height: 42px; /* Standardize height with inputs */
+  vertical-align: middle;
 }
