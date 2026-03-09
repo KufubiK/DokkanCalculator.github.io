@@ -25,6 +25,7 @@
       <div class="tabs">
         <button class="tab-button active" onclick="openTab('attack-tab')">Attack Calculator</button>
         <button class="tab-button" onclick="openTab('defense-tab')">Defense Calculator</button>
+        <button class="tab-button" onclick="openTab('damage-tab')">Damage Taken Calculator</button>
         <button class="tab-button" onclick="openTab('instructions-tab')">Instructions</button>
       </div>
     </div>
@@ -77,6 +78,71 @@
         <div id="defResult" class="result-box">Result: -</div>
       </div>
     </div>
+    
+    <div id="damage-tab" class="tab-content">
+      <div class="section">
+        <h2>DMG Taken Calculator</h2>
+        <div class="form-grid">
+          <div class="form-row"><label for="EdefStat">Your Character DEF</label><input type="number" id="EdefStat" /></div>
+          <div class="form-row"><label for="BossNormal">Boss ATK Stat</label><input type="number" id="BossNormal" /></div>
+          <div class="form-row"><label for="BossSAMultiplier">Boss SA Multiplier %</label><input type="number" id="BossSAMultiplier" /></div>
+          <div class="form-row"><label for="BossRaiseAtk">Boss Raise ATK on SA %</label><input type="number" id="BossRaiseAtk" /></div>
+          <div class="form-row"><label for="BossOtherAtk">Boss Other ATK %</label><input type="number" id="BossOtherAtk" /></div>
+          <div class="form-row"><label for="HiddenPotential">HP Type Defense Boost</label><input type="number" id="HiddenPotential" /></div>
+          <div class="form-row"><label for="dmgReduction">Damage Reduction %</label><input type="number" id="dmgReduction" /></div>
+          
+          <div class="form-row">
+            <label for="critSelect">Boss Crits?</label>
+            <select id="critSelect" onchange="toggleDefIgnore()">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+          
+          <div class="form-row">
+            <label for="defIgnore">Boss DEF Ignore %</label>
+            <input type="number" id="defIgnore" disabled />
+          </div>
+
+          <div class="form-row">
+            <label for="guardSelect">Passive Guard?</label>
+            <select id="guardSelect">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="aoeSelect">AoE Super Attack?</label>
+            <select id="aoeSelect">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="classSelect">Class Relation</label>
+            <select id="classSelect">
+              <option value="opposite">Opposite (Ext vs Sup)</option>
+              <option value="same">Same (Ext vs Ext)</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="typeSelect">Type Relation</label>
+            <select id="typeSelect">
+              <option value="neutral">Neutral</option>
+              <option value="advantage">Advantage</option>
+              <option value="disadvantage">Disadvantage</option>
+            </select>
+          </div>
+        </div>
+        <button onclick="calculateDMG()">Calculate Damage</button>
+        <div id="dmgResult" class="result-box">Result: -</div>
+      </div>
+    </div>
+
+
     
     <!-- Instructions Tab -->
     <div id="instructions-tab" class="tab-content">
