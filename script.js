@@ -81,11 +81,11 @@ function calculateATK() {
     let result = getVal("atkStat");
     result = Math.floor(result * (1 + getVal("atkLeader") / 100));
     result = Math.floor(result * (1 + getVal("atkSupportMemory") / 100));
-    result = Math.floor(result * (1 + (getVal("atkSoT") + getVal("atkSupport")) / 100));
+    result = Math.floor(result * (1 + (getVal("atkSoT") + getVal("SoTatkSupport")) / 100));
     result = Math.floor(result * (1 + getVal("atkLinks") / 100));
-    result = Math.floor(result * (1 + (getVal("atkActive") + getVal("atkEActive")) / 100));
+    result = Math.floor(result * (1 + (getVal("atkActive")) / 100));
     result = Math.ceil(result * (getVal("atkKiMulti") / 100));
-    result = Math.floor(result * (1 + getVal("atkNonSoT") / 100));
+    result = Math.floor(result * (1 + (getVal("atkNonSoT") + getVal("NSoTatkSupport")) / 100));
     
     // SA Multiplier grouping
     const saSum = (getVal("atkSAMulti") + getVal("atkSAEffect") + getVal("atkStacking")) / 100 + (getVal("atkSABoost") * 0.05);
@@ -101,10 +101,10 @@ function calculateDEF() {
     let result = getVal("defStat");
     result = Math.floor(result * (1 + getVal("defLeader") / 100));
     result = Math.floor(result * (1 + getVal("defSupportMemory") / 100));
-    result = Math.floor(result * (1 + (getVal("defSoT") + getVal("defSupport")) / 100));
+    result = Math.floor(result * (1 + (getVal("defSoT") + getVal("SoTdefSupport")) / 100));
     result = Math.floor(result * (1 + getVal("defLinks") / 100));
     result = Math.floor(result * (1 + (getVal("defActive") + getVal("defEActive")) / 100));
-    result = Math.floor(result * (1 + getVal("defNonSoT") / 100));
+    result = Math.floor(result * (1 + (getVal("defNonSoT") + getVal("NSoTdefSupport")) / 100));
     result = Math.floor(result * (1 + getVal("defSAEffect") / 100));
     result = Math.floor(result * (1 + getVal("defdomain") / 100));
     result = Math.floor(result * (1 + getVal("defStacking") / 100));
