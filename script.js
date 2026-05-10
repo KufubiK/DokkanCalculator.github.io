@@ -103,7 +103,7 @@ function calculateDEF() {
     result = Math.floor(result * (1 + getVal("defSupportMemory") / 100));
     result = Math.floor(result * (1 + (getVal("defSoT") + getVal("SoTdefSupport")) / 100));
     result = Math.floor(result * (1 + getVal("defLinks") / 100));
-    result = Math.floor(result * (1 + (getVal("defActive") + getVal("defEActive")) / 100));
+    result = Math.floor(result * (1 + (getVal("defActive")) / 100));
     result = Math.floor(result * (1 + (getVal("defNonSoT") + getVal("NSoTdefSupport")) / 100));
     result = Math.floor(result * (1 + getVal("defSAEffect") / 100));
     result = Math.floor(result * (1 + getVal("defdomain") / 100));
